@@ -3,13 +3,19 @@
 @section('content')
     <div class="container">
         <div class="container">
-            <a href="{{ url()->current() . '/create' }}" role="button" type="button" class="btn btn-primary btn-lg btn-block">Criar postagem</a>
+            <a href="{{ route('posts.create') }}" role="button" type="button" class="btn btn-primary btn-lg btn-block">Criar postagem</a>
         </div>
 
         <div class="mt-3">
             @foreach($posts as $post)
+                <br>
                 <h2>{{ $post->title }}</h2>
                 <p>{{ $post->content }}</p>
+                <p>
+                    <small><a href="{{ route('posts.edit', $post->id) }}">Editar</a></small> |
+                    <small><a href="{{ route('posts.delete', $post->id) }}">Excluir</a></small>
+                </p>
+                <hr>
             @endforeach
         </div>
     </div>

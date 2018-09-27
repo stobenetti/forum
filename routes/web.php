@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'PostsController@index')->name('home');
 
 Route::resource('posts', 'PostsController');
+
+Route::get('/posts/delete/{id}', 'PostsController@delete')->name('posts.delete');
