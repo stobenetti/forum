@@ -9,7 +9,7 @@
         <div class="mt-3">
             @foreach($posts as $post)
                 <br>
-                <h2>{{ $post->title }}</h2>
+                <h2><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></h2>
                 <p>{{ $post->content }}</p>
                 <p>
                     <small><a href="{{ route('posts.edit', $post->id) }}">Editar</a></small> |

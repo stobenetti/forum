@@ -2,23 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
 use App\Reply;
-use App\User;
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
-class PostsController extends Controller {
+class RepliesController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $posts = Post::whereDeleted(0)->get();
-        return view('posts.index')
-            ->with('posts', $posts);
+        //
     }
 
     /**
@@ -26,8 +21,8 @@ class PostsController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        return view('posts.create');
+    public function create($post_id) {
+        return view('replies.create')->with('post_id', $post_id);
     }
 
     /**
@@ -37,66 +32,63 @@ class PostsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $post = new Post;
-        $post->user_id = Auth::id();
-        $post->title = $request->get('title');
-        $post->content = $request->get('content');
-        $post->save();
+        $reply = new Reply;
+        $reply->post_id = $request->get('post_id');
+        $reply->user_id = Auth::id();
+        $reply->content = $request->get('content');
+        $reply->save();
 
-        return Redirect::to('posts');
+        return redirect('posts/' . $reply->post_id);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post $post
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $post = Post::find($id);
-        $replies = Reply::where(['post_id' => $id, 'deleted' => 0])->get();
-        return view('posts.show')
-            ->with('post', $post)
-            ->with('replies', $replies);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Post $post
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        $post = Post::find($id);
-        return view('posts.edit')->with('post', $post);
+        $reply = Reply::find($id);
+        return view('replies.edit')
+            ->with('reply', $reply);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Post $post
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $post = Post::find($id);
-        $post->update($request->all());
-        return redirect('posts');
+        $reply = Reply::find($id);
+        $reply->update($request->all());
+        return redirect('posts/' . $reply->post_id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post $post
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
     }
 
     public function delete($id) {
-        $post = Post::find($id);
-        $post->deleted = 1;
-        $post->save();
-        return redirect('posts');
+        $reply = Reply::find($id);
+        $reply->deleted = 1;
+        $reply->save();
+        return redirect('posts/' . $reply->post_id);
     }
 }

@@ -22,3 +22,9 @@ Route::get('/home', 'PostsController@index')->name('home');
 Route::resource('posts', 'PostsController');
 
 Route::get('/posts/delete/{id}', 'PostsController@delete')->name('posts.delete');
+
+Route::resource('replies', 'RepliesController');
+
+Route::get('/replies/create/{post_id}', 'RepliesController@create')->name('replies.create');
+
+Route::get('/replies/delete/{id}', 'RepliesController@delete')->name('replies.delete');
