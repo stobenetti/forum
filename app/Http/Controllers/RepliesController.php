@@ -82,9 +82,6 @@ class RepliesController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
-    }
-
     public function delete($id) {
         $reply = Reply::find($id);
         $reply->deleted = 1;

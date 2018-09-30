@@ -68,6 +68,9 @@ class PostsController extends Controller {
      */
     public function edit($id) {
         $post = Post::find($id);
+        if (Auth::id() !== $post->user_id) {
+            return redirect('posts');
+        }
         return view('posts.edit')->with('post', $post);
     }
 
@@ -80,6 +83,9 @@ class PostsController extends Controller {
      */
     public function update(Request $request, $id) {
         $post = Post::find($id);
+        if (Auth::id() !== $post->user_id) {
+            return redirect('posts');
+        }
         $post->update($request->all());
         return redirect('posts');
     }
@@ -90,11 +96,11 @@ class PostsController extends Controller {
      * @param  \App\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
-    }
-
     public function delete($id) {
         $post = Post::find($id);
+        if (Auth::id() !== $post->user_id) {
+            return redirect('posts');
+        }
         $post->deleted = 1;
         $post->save();
         return redirect('posts');
