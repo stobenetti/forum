@@ -18,7 +18,9 @@
             @foreach($replies as $reply)
 
                 <p>{{ App\User::find($reply->user_id)->name }}: {{ $reply->content }}</p>
-                <p style="opacity: 0.5"><a href="{{ route('replies.edit', $reply->id) }}">Editar</a> | <a href="{{ route('replies.delete', $reply->id) }}">Excluir</a></p>
+                <div class="row ml-2" style="visibility: {{ Auth::id() != $reply->user_id ? 'hidden' : 'visible' }}">
+                    <p style="opacity: 0.5"><a href="{{ route('replies.edit', $reply->id) }}">Editar</a> | <a href="{{ route('replies.delete', $reply->id) }}">Excluir</a></p>
+                </div>
 
             @endforeach
         </div>

@@ -11,11 +11,15 @@
                 <br>
                 <h2><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></h2>
                 <p>{{ $post->content }}</p>
-                <p>
-                    <small><a style="{{ $post->user_id != Auth::id() ? 'hidden' : '' }}" href="{{ route('posts.edit', $post->id) }}">Editar</a></small> |
-                    <small><a style="{{ $post->user_id != Auth::id() ? 'hidden' : '' }}" href="{{ route('posts.delete', $post->id) }}">Excluir</a></small> |
-                    <small><a href="{{ route('favorites.verify', $post->id) }}">Favorito</a></small>
-                </p>
+                <div class="row ml-3">
+                    <small><a href="{{ route('favorites.verify', $post->id) }}" class="mr-2">Favorito</a></small>
+                    <div style="visibility: {{ Auth::id() != $post->user_id ? 'hidden' : 'visible' }}">
+                        |
+                        <small><a href="{{ route('posts.edit', $post->id) }}">Editar</a></small>
+                        |
+                        <small><a href="{{ route('posts.delete', $post->id) }}">Excluir</a></small>
+                    </div>
+                </div>
                 <hr>
             @endforeach
         </div>

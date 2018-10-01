@@ -59,6 +59,9 @@ class RepliesController extends Controller {
      */
     public function edit($id) {
         $reply = Reply::find($id);
+        if (Auth::id() !== $reply->user_id) {
+            return redirect('posts/' . $reply->post_id);
+        }
         return view('replies.edit')
             ->with('reply', $reply);
     }
@@ -72,7 +75,9 @@ class RepliesController extends Controller {
      */
     public function update(Request $request, $id) {
         $reply = Reply::find($id);
-        $reply->update($request->all());
+        if (Auth::id() == $reply->user_id) {
+            $reply->update($request->all());
+        }
         return redirect('posts/' . $reply->post_id);
     }
 
@@ -84,8 +89,10 @@ class RepliesController extends Controller {
      */
     public function delete($id) {
         $reply = Reply::find($id);
-        $reply->deleted = 1;
-        $reply->save();
+        if (Auth::id() == $reply->user_id) {
+            $reply->deleted = 1;
+            $reply->save();
+        }
         return redirect('posts/' . $reply->post_id);
     }
 }
