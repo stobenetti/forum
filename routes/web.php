@@ -15,18 +15,23 @@ Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
-Route::get('/home', 'PostsController@index')->name('home');
+Route::middleware('auth')->group(function () {
 
-Route::resource('posts', 'PostsController');
+    Route::get('/home', 'PostsController@index')->name('home');
 
-Route::get('/posts/delete/{id}', 'PostsController@delete')->name('posts.delete');
+    Route::resource('posts', 'PostsController');
 
-Route::resource('replies', 'RepliesController');
+    Route::get('/posts/delete/{id}', 'PostsController@delete')->name('posts.delete');
 
-Route::get('/replies/create/{post_id}', 'RepliesController@create')->name('replies.create');
+    Route::resource('replies', 'RepliesController');
 
-Route::get('/replies/delete/{id}', 'RepliesController@delete')->name('replies.delete');
+    Route::get('/replies/create/{post_id}', 'RepliesController@create')->name('replies.create');
 
-Route::get('/favorites/verify/{post_id}', 'FavoritesController@verify')->name('favorites.verify');
+    Route::get('/replies/delete/{id}', 'RepliesController@delete')->name('replies.delete');
 
-Route::get('/favorites/index/', 'FavoritesController@index')->name('favorites.index');
+//Route::get('/favorites/verify/', 'FavoritesController@verify')->name('favorites.verify');
+    Route::post('/favorites/verify/', 'FavoritesController@verify')->name('favorites.verify');
+
+    Route::get('/favorites/index/', 'FavoritesController@index')->name('favorites.index');
+
+});
