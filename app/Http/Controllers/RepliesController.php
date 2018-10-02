@@ -7,6 +7,7 @@ use Auth;
 use Illuminate\Http\Request;
 
 class RepliesController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
@@ -95,4 +96,5 @@ class RepliesController extends Controller {
         }
         return redirect('posts/' . $reply->post_id);
     }
+
 }

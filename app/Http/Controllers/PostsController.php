@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
 class PostsController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
@@ -69,9 +70,9 @@ class PostsController extends Controller {
     public function edit($id) {
         $post = Post::find($id);
         if (Auth::id() == $post->user_id) {
-            return redirect('posts');
+            return view('posts.edit')->with('post', $post);
         }
-        return view('posts.edit')->with('post', $post);
+        return redirect('posts');
     }
 
     /**
@@ -103,4 +104,5 @@ class PostsController extends Controller {
         }
         return redirect('posts');
     }
+
 }
