@@ -12,7 +12,12 @@
                 <h2><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></h2>
                 <p>{{ $post->content }}</p>
                 <div class="row ml-3">
-                    <small><a href="{{ route('favorites.verify', $post->id) }}" class="mr-2">Favorito</a></small>
+                    {!! Form::open(['route' => 'favorites.verify']) !!}
+
+{{--                    <small><a href="{{ route('favorites.verify') }}" class="mr-2">Favorito</a></small>--}}
+                    {!! Form::hidden('post_id', $post->id) !!}
+                    {!! Form::submit('Favorito') !!}
+                    {!! Form::close() !!}
                     <div style="visibility: {{ Auth::id() != $post->user_id ? 'hidden' : 'visible' }}">
                         |
                         <small><a href="{{ route('posts.edit', $post->id) }}">Editar</a></small>
