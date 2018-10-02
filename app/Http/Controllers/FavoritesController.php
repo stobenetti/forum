@@ -24,7 +24,7 @@ class FavoritesController extends Controller {
         $post_id = $request->get('post_id');
         $result = Favorite::where(['user_id' => $user_id, 'post_id' => $post_id])->first();
         if ($result == null) {
-            $favorite = new Favorite();
+            $favorite = new Favorite;
             $favorite->user_id = $user_id;
             $favorite->post_id = $post_id;
             $favorite->save();
