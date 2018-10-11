@@ -7,8 +7,8 @@ use App\Post;
 use Auth;
 use Illuminate\Http\Request;
 
-class FavoritesController extends Controller {
-
+class FavoritesController extends Controller
+{
     public function index() {
         $favorites = Favorite::whereUser_id(Auth::id())->get();
         $posts = array();
@@ -18,20 +18,21 @@ class FavoritesController extends Controller {
         return view('favorites.index')->with('posts', $posts);
     }
 
-//    public function verify($post_id) {
-    public function verify(Request $request) {
+    public function verify($post_id) {
         $user_id = Auth::id();
-        $post_id = $request->get('post_id');
         $result = Favorite::where(['user_id' => $user_id, 'post_id' => $post_id])->first();
         if ($result == null) {
             $favorite = new Favorite;
             $favorite->user_id = $user_id;
             $favorite->post_id = $post_id;
-            $favorite->save();
+            if ($favorite->save()) {
+                echo 'criou';
+            }
+//            $favorite->save();
         }
         else {
             $result->delete();
         }
-        return redirect('posts');
+//        return redirect('posts');
     }
 }

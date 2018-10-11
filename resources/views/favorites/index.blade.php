@@ -11,11 +11,7 @@
                 <h2><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></h2>
                 <p>{{ $post->content }}</p>
                 <p>
-{{--                    <small><a href="{{ route('favorites.verify', $post->id) }}">Remover dos favoritos</a></small>--}}
-                    {!! Form::open(['route' => 'favorites.verify']) !!}
-                    {!! Form::hidden('post_id', $post->id) !!}
-                    {!! Form::submit('Remover dos favoritos') !!}
-                    {!! Form::close() !!}
+                    <small><a href="{{ route('favorites.verify', $post->id) }}">Remover dos favoritos</a></small>
                 </p>
                 <hr>
             @endforeach
