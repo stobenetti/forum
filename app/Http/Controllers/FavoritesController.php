@@ -33,6 +33,6 @@ class FavoritesController extends Controller
         else {
             $result->delete();
         }
-//        return redirect('posts');
+        return redirect('posts');
     }
 }

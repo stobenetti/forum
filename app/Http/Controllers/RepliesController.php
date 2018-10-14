@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Reply;
+use App\Post;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,8 @@ class RepliesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create($post_id) {
-        return view('replies.create')->with('post_id', $post_id);
+        $post = Post::find($post_id);
+        return view('replies.create')->with(['post_id' => $post_id, 'post' => $post]);
     }
 
     /**

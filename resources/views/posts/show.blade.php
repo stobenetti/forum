@@ -2,28 +2,29 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container mt-3">
+        <div class="container">
 
-        <h2>{{ $post->title }}</h2>
-
-        <div class="mt-4">
-            <h5>{{ $post->content }}</h5>
+            <h3 class="card-title">{{ $post->title }}</h3>
+            <hp class="card-text text-justify">{{ $post->content }}</hp>
+            <div class="row justify-content-center my-5">
+                <a href="{{ route('replies.create', $post->id) }}" role="button" class="btn btn-primary btn-lg btn-block">Responder</a>
+            </div>
         </div>
 
-        <hr>
 
-        <a href="{{ route('replies.create', $post->id) }}" role="button" type="button" class="btn btn-light">Responder</a>
+        @foreach($replies as $reply)
+<hr>
+            <div class="">
 
-        <div class="mt-3">
-            @foreach($replies as $reply)
-
-                <p>{{ App\User::find($reply->user_id)->name }}: {{ $reply->content }}</p>
-                <div class="row ml-2" style="visibility: {{ Auth::id() != $reply->user_id ? 'hidden' : 'visible' }}">
-                    <p style="opacity: 0.5"><a href="{{ route('replies.edit', $reply->id) }}">Editar</a> | <a href="{{ route('replies.delete', $reply->id) }}">Excluir</a></p>
+                <div class="pb-2 mt-2">{{ App\User::find($reply->user_id)->name }}: {{ $reply->content }}
+                    <span class="float-right pt-3" style="visibility: {{ Auth::id() != $reply->user_id ? 'hidden' : 'visible' }}">
+                        <a href="{{ route('replies.edit', $reply->id) }}" style="color: #861388" class="mr-4"><i class="material-icons">edit</i></a>
+                        <a href="{{ route('replies.delete', $reply->id) }}" style="color: #861388" class="mr-2"><i class="material-icons">delete</i></a>
+                    </span>
                 </div>
-
-            @endforeach
-        </div>
+            </div>
+        @endforeach
 
     </div>
 

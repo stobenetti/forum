@@ -2,27 +2,37 @@
 
 @section('content')
     <div class="container">
-        <div class="container">
-            <a href="{{ route('posts.create') }}" role="button" type="button" class="btn btn-primary btn-lg btn-block">Criar postagem</a>
+        <div class="container mt-2">
+            <a href="{{ route('posts.create') }}" role="button" class="btn btn-primary btn-lg btn-block">Criar postagem</a>
         </div>
 
         <div class="mt-3">
             @foreach($posts as $post)
                 <br>
-                <h2><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></h2>
-                <p>{{ $post->content }}</p>
-                <div class="row ml-3">
-                    <span>
-                        <small><a href="{{ route('favorites.verify', $post->id) }}">Favorito</a></small>
-                    </span>
-                    <span class="ml-1" style="visibility: {{ Auth::id() != $post->user_id ? 'hidden' : 'visible' }}">
-                        |
-                        <small><a href="{{ route('posts.edit', $post->id) }}">Editar</a></small>
-                        |
-                        <small><a href="{{ route('posts.delete', $post->id) }}">Excluir</a></small>
-                    </span>
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ route('posts.show', $post->id) }}"><h5 class="ml-0 p-0 card-title btn btn-link">{{ $post->title }}</h5></a>
+                        <p class="card-text">{{ $post->content }}</p>
+
+                        <div class="container">
+                            <div class="row">
+                                <span>
+                                    <a class="btn btn-icon btn-2 btn-primary mr-4" role="button" href="{{ route('favorites.verify', $post->id) }}">
+                                        <span class="btn-inner--icon"><i class="material-icons">star</i></span>
+                                    </a>
+                                </span>
+                                <span class="ml-1" style="visibility: {{ Auth::id() != $post->user_id ? 'hidden' : 'visible' }}">
+                                    <a class="btn btn-icon btn-2 btn-primary mr-4" role="button" href="{{ route('posts.edit', $post->id) }}">
+                                        <span class="btn-inner--icon"><i class="material-icons">edit</i></span>
+                                    </a>
+                                    <a class="btn btn-icon btn-2 btn-primary mr-4" role="button" href="{{ route('posts.delete', $post->id) }}">
+                                        <span class="btn-inner--icon"><i class="material-icons">delete</i></span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <hr>
             @endforeach
         </div>
     </div>
