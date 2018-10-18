@@ -72,7 +72,7 @@ class PostsController extends Controller {
         if (Auth::id() == $post->user_id) {
             return view('posts.edit')->with('post', $post);
         }
-        return redirect('posts');
+        return redirect('posts/' . $id);
     }
 
     /**
@@ -87,7 +87,7 @@ class PostsController extends Controller {
         if (Auth::id() == $post->user_id) {
             $post->update($request->all());
         }
-        return redirect('posts');
+        return redirect('posts/' . $id);
     }
 
     /**
