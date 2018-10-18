@@ -22,10 +22,10 @@
             </div>
 
             <ul class="navbar-nav ml-lg-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('favorites.index') }}"><b>Favoritos</b>
-                    </a>
-                </li>
+                {{--<li class="nav-item">--}}
+                    {{--<a class="nav-link" href="{{ route('favorites.index') }}"><b>Favoritos</b>--}}
+                    {{--</a>--}}
+                {{--</li>--}}
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" id="navbar-primary_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ @Auth::user()->name?: '' }}</a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-primary_dropdown_1">

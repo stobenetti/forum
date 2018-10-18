@@ -16,11 +16,11 @@
 
                         <div class="container">
                             <div class="row">
-                                <span>
-                                    <a class="btn btn-icon btn-2 btn-primary mr-4" role="button" href="{{ route('favorites.verify', $post->id) }}">
-                                        <span class="btn-inner--icon"><i class="material-icons">star</i></span>
-                                    </a>
-                                </span>
+                                {{--<span>--}}
+                                    {{--<a class="btn btn-icon btn-2 btn-primary mr-4" role="button" href="{{ route('favorites.verify', $post->id) }}">--}}
+                                        {{--<span class="btn-inner--icon"><i class="material-icons">star</i></span>--}}
+                                    {{--</a>--}}
+                                {{--</span>--}}
                                 <span class="ml-1" style="visibility: {{ Auth::id() != $post->user_id ? 'hidden' : 'visible' }}">
                                     <a class="btn btn-icon btn-2 btn-primary mr-4" role="button" href="{{ route('posts.edit', $post->id) }}">
                                         <span class="btn-inner--icon"><i class="material-icons">edit</i></span>
