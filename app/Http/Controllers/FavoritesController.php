@@ -2,33 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Favorite;
-use App\Post;
-use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Favorite;
 
-class FavoritesController extends Controller
-{
+class FavoritesController extends Controller {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index() {
-        $favorites = Favorite::whereUser_id(Auth::id())->get();
-        $posts = array();
-        foreach ($favorites as $favorite) {
-            $posts[] = Post::find($favorite->post_id);
-        }
-        return view('favorites.index')->with('posts', $posts);
+        $user_id = Auth::id();
+        $favorites = Favorite::where('user_id', $user_id)
+            ->get();
+        return view('favorites.index')->with('favorites', $favorites);
     }
 
-    public function verify($post_id) {
+    public function verify(Request $request) {
         $user_id = Auth::id();
-        $result = Favorite::where(['user_id' => $user_id, 'post_id' => $post_id])->first();
+        $result = Favorite::where('user_id', '=', $user_id)
+            ->where('post_id', '=', $request->post_id)
+            ->first();
+        var_dump($result);
         if ($result == null) {
             $favorite = new Favorite;
-            $favorite->user_id = $user_id;
-            $favorite->post_id = $post_id;
-            if ($favorite->save()) {
-                echo 'criou';
-            }
-//            $favorite->save();
+            $favorite->user_id = Auth::id();
+            $favorite->post_id = $request->post_id;
+            $favorite->save();
         }
         else {
             $result->delete();

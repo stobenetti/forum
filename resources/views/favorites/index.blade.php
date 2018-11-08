@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="mt-3">
-            @if (sizeof($posts) < 1)
+            @if (sizeof($favorites) < 1)
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Você ainda não adicionou favoritos.</h5>
@@ -12,7 +12,7 @@
                     </div>
                 </div>
             @endif
-            @foreach($posts as $post)
+            @foreach($favorites as $post)
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ route('posts.show', $post->id) }}"><h5 class="ml-0 p-0 card-title btn btn-link">{{ $post->title }}</h5></a>

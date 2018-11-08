@@ -16,11 +16,14 @@
 
                         <div class="container">
                             <div class="row">
-                                {{--<span>--}}
-                                    {{--<a class="btn btn-icon btn-2 btn-primary mr-4" role="button" href="{{ route('favorites.verify', $post->id) }}">--}}
-                                        {{--<span class="btn-inner--icon"><i class="material-icons">star</i></span>--}}
-                                    {{--</a>--}}
-                                {{--</span>--}}
+                                <span>
+                                    {!! Form::open(['route' => 'favorites.verify', 'id' => 'favorite_form']) !!}
+                                    {!! Form::hidden('post_id', $post->id) !!}
+                                    <a id="favorite" class="btn btn-icon btn-2 btn-primary mr-4" role="button" onclick="sendForm()" style="color: #fff;">
+                                        <span class="btn-inner--icon"><i class="material-icons">star</i></span>
+                                    </a>
+                                    {!! Form::close() !!}
+                                    </span>
                                 <span class="ml-1" style="visibility: {{ Auth::id() != $post->user_id ? 'hidden' : 'visible' }}">
                                     <a class="btn btn-icon btn-2 btn-primary mr-4" role="button" href="{{ route('posts.edit', $post->id) }}">
                                         <span class="btn-inner--icon"><i class="material-icons">edit</i></span>
@@ -36,4 +39,10 @@
             @endforeach
         </div>
     </div>
+
+    <script type="text/javascript">
+        function sendForm() {
+            document.getElementById("favorite_form").submit();
+        }
+    </script>
 @endsection
