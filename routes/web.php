@@ -29,8 +29,14 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/replies/delete/{id}', 'RepliesController@delete')->name('replies.delete');
 
-    Route::get('/favorites/verify/{post_id}', 'FavoritesController@verify')->name('favorites.verify');
-
     Route::get('/favorites/index/', 'FavoritesController@index')->name('favorites.index');
 
+    Route::post('/favorites/verify/', 'FavoritesController@verify')->name('favorites.verify');
+
+//    Route::get('/favorites/store/{post_id}', 'FavoritesController@store')->name('favorites.store');
+//    Route::post('/favorites/check', 'FavoritesController@index')->name('favorites.check');
+
 });
+
+
+Route::get('/sair', 'LogUserOut@index')->name('log_out');
