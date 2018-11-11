@@ -8,7 +8,8 @@
                     <div class="card-header text-center">{{ __('Login') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('login') }}">
+                        <form method="POST" action="{{ route('external_login') }}" id="login_form">
+                        {{--<form id="login_form">--}}
                             @csrf
 
                             <div class="row">
@@ -58,6 +59,7 @@
                             <div class="row mt-2">
                                 <div class="col-md-6 text-center">
                                     <button class="btn btn-primary" type="submit">
+                                    {{--<button class="btn btn-primary" id="login">--}}
                                         Entrar
                                     </button>
                                 </div>
@@ -73,4 +75,5 @@
             </div>
         </div>
     </div>
-@endsection
+
+    @endsection
