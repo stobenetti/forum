@@ -10,7 +10,7 @@
             <div class="">
 
                 <div class="pb-2 mt-2">
-                    <span class="float-right pt-3" style="visibility: {{ Auth::id() != $post->user_id ? 'hidden' : 'visible' }}">
+                    <span class="float-right pt-3" style="visibility: {{ $_COOKIE['user_id'] != $post->user_id ? 'hidden' : 'visible' }}">
                         <a href="{{ route('posts.edit', $post->id) }}" style="color: #861388" class="mr-4"><i class="material-icons">edit</i></a>
                         <a href="{{ route('posts.delete', $post->id) }}" style="color: #861388" class="mr-2"><i class="material-icons">delete</i></a>
                     </span>
@@ -27,7 +27,7 @@
             <div class="">
 
                 <div class="pb-2 mt-2">{{ App\User::find($reply->user_id)->name }}: {{ $reply->content }}
-                    <span class="float-right pt-3" style="visibility: {{ Auth::id() != $reply->user_id ? 'hidden' : 'visible' }}">
+                    <span class="float-right pt-3" style="visibility: {{ $_COOKIE['user_id'] != $reply->user_id ? 'hidden' : 'visible' }}">
                         <a href="{{ route('replies.edit', $reply->id) }}" style="color: #861388" class="mr-4"><i class="material-icons">edit</i></a>
                         <a href="{{ route('replies.delete', $reply->id) }}" style="color: #861388" class="mr-2"><i class="material-icons">delete</i></a>
                     </span>

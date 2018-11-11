@@ -37,7 +37,7 @@ class RepliesController extends Controller {
     public function store(Request $request) {
         $reply = new Reply;
         $reply->post_id = $request->get('post_id');
-        $reply->user_id = Auth::id();
+        $reply->user_id = $_COOKIE['user_id'];
         $reply->content = $request->get('content');
         $reply->save();
 
@@ -62,7 +62,7 @@ class RepliesController extends Controller {
      */
     public function edit($id) {
         $reply = Reply::find($id);
-        if (Auth::id() !== $reply->user_id) {
+        if ($_COOKIE['user_id'] != $reply->user_id) {
             return redirect('posts/' . $reply->post_id);
         }
         return view('replies.edit')
@@ -78,7 +78,7 @@ class RepliesController extends Controller {
      */
     public function update(Request $request, $id) {
         $reply = Reply::find($id);
-        if (Auth::id() == $reply->user_id) {
+        if ($_COOKIE['user_id'] == $reply->user_id) {
             $reply->update($request->all());
         }
         return redirect('posts/' . $reply->post_id);
@@ -92,7 +92,7 @@ class RepliesController extends Controller {
      */
     public function delete($id) {
         $reply = Reply::find($id);
-        if (Auth::id() == $reply->user_id) {
+        if ($_COOKIE['user_id'] == $reply->user_id) {
             $reply->deleted = 1;
             $reply->save();
         }

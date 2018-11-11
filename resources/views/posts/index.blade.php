@@ -2,9 +2,12 @@
 
 @section('content')
     <div class="container">
-        <div class="container mt-2">
-            <a href="{{ route('posts.create') }}" role="button" class="btn btn-primary btn-lg btn-block">Criar postagem</a>
-        </div>
+{{--        @if (Auth::user()->privilege == 1)--}}
+        @if ($_COOKIE['user_privilege'] == 1)
+            <div class="container mt-2">
+                <a href="{{ route('posts.create') }}" role="button" class="btn btn-primary btn-lg btn-block">Criar postagem</a>
+            </div>
+        @endif
 
         <div class="mt-3">
             @foreach($posts as $post)
@@ -24,7 +27,7 @@
                                     </a>
                                     {!! Form::close() !!}
                                     </span>
-                                <span class="ml-1" style="visibility: {{ Auth::id() != $post->user_id ? 'hidden' : 'visible' }}">
+                                <span class="ml-1" style="visibility: {{ $_COOKIE['user_id'] != $post->user_id ? 'hidden' : 'visible' }}">
                                     <a class="btn btn-icon btn-2 btn-primary mr-4" role="button" href="{{ route('posts.edit', $post->id) }}">
                                         <span class="btn-inner--icon"><i class="material-icons">edit</i></span>
                                     </a>

@@ -27,7 +27,7 @@
                 </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbar-primary_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ @Auth::user()->name?: '' }}</a>
+                    <a class="nav-link" href="#" id="navbar-primary_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $_COOKIE['user_name'] }}</a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-primary_dropdown_1">
                         <a class="dropdown-item" href="{{ route('log_out') }}">
                            {{--onclick="event.preventDefault();--}}

@@ -39,7 +39,7 @@ class PostsController extends Controller {
      */
     public function store(Request $request) {
         $post = new Post;
-        $post->user_id = Auth::id();
+        $post->user_id = $_COOKIE['user_id'];
         $post->title = $request->get('title');
         $post->content = $request->get('content');
         $post->save();
@@ -69,7 +69,7 @@ class PostsController extends Controller {
      */
     public function edit($id) {
         $post = Post::find($id);
-        if (Auth::id() == $post->user_id) {
+        if ($_COOKIE['user_id'] == $post->user_id) {
             return view('posts.edit')->with('post', $post);
         }
         return redirect('posts/' . $id);
@@ -84,7 +84,7 @@ class PostsController extends Controller {
      */
     public function update(Request $request, $id) {
         $post = Post::find($id);
-        if (Auth::id() == $post->user_id) {
+        if ($_COOKIE['user_id'] == $post->user_id) {
             $post->update($request->all());
         }
         return redirect('posts/' . $id);
@@ -98,7 +98,7 @@ class PostsController extends Controller {
      */
     public function delete($id) {
         $post = Post::find($id);
-        if (Auth::id() == $post->user_id) {
+        if ($_COOKIE['user_id'] == $post->user_id) {
             $post->deleted = 1;
             $post->save();
         }

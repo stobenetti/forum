@@ -28,7 +28,8 @@
 </head>
 <body>
 <div id="app">
-    @if (Auth::check())
+{{--    @if (Auth::check())--}}
+    @if (!empty($_COOKIE['access_token']))
         @include('layouts.navbar_logged_in')
     @else
         @include('layouts.navbar')
@@ -45,5 +46,7 @@
 <script src="{{ asset('assets/vendor/popper/popper.min.js') }}" defer></script>
 <script src="{{ asset('assets/vendor/bootstrap/bootstrap.min.js') }}" defer></script>
 <script src="{{ asset('assets/js/argon.js') }}" defer></script>
+<script src="{{ asset('js/login.js') }}" defer></script>
+
 </body>
 </html>
