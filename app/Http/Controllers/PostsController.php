@@ -44,7 +44,7 @@ class PostsController extends Controller {
         $post->content = $request->get('content');
         $post->save();
 
-        return redirect('posts');
+        return redirect('posts/' . $post->id);
     }
 
     /**
