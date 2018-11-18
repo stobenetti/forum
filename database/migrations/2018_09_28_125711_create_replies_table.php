@@ -17,6 +17,7 @@ class CreateRepliesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id');
+            $table->string('user_name', 255);
             $table->integer('post_id');
             $table->string('content', 255);
             $table->tinyInteger('deleted')->default(0);

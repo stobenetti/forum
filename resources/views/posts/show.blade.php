@@ -26,7 +26,7 @@
             <hr>
             <div class="">
 
-                <div class="pb-2 mt-2">{{ App\User::find($reply->user_id)->name }}: {{ $reply->content }}
+                <div class="pb-2 mt-2">{{ $reply->user_name }}: {{ $reply->content }}
                     <span class="float-right pt-3" style="visibility: {{ $_COOKIE['user_id'] != $reply->user_id ? 'hidden' : 'visible' }}">
                         <a href="{{ route('replies.edit', $reply->id) }}" style="color: #861388" class="mr-4"><i class="material-icons">edit</i></a>
                         <a href="{{ route('replies.delete', $reply->id) }}" style="color: #861388" class="mr-2"><i class="material-icons">delete</i></a>
