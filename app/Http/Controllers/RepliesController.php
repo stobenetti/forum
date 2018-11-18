@@ -38,6 +38,7 @@ class RepliesController extends Controller {
         $reply = new Reply;
         $reply->post_id = $request->get('post_id');
         $reply->user_id = $_COOKIE['user_id'];
+        $reply->user_name = $_COOKIE['user_name'];
         $reply->content = $request->get('content');
         $reply->save();
 
