@@ -24,18 +24,18 @@
                                     {!! Form::open(['route' => 'favorites.verify', 'id' => 'favorite_form']) !!}
                                     {!! Form::hidden('post_id', $post->id) !!}
                                     <a id="favorite" class="btn btn-icon btn-2 btn-primary mr-4" role="button" onclick="sendForm()" style="color: #fff;">
-                                        <span class="btn-inner--icon"><i class="material-icons">star</i></span>
+                                        <span class="btn-inner--icon">Remover dos favoritos</span>
                                     </a>
                                     {!! Form::close() !!}
                                     </span>
-                                <span class="ml-1" style="visibility: {{ $_COOKIE['user_id'] != $post->user_id ? 'hidden' : 'visible' }}">
-                                    <a class="btn btn-icon btn-2 btn-primary mr-4" role="button" href="{{ route('posts.edit', $post->id) }}">
-                                        <span class="btn-inner--icon"><i class="material-icons">edit</i></span>
-                                    </a>
-                                    <a class="btn btn-icon btn-2 btn-primary mr-4" role="button" href="{{ route('posts.delete', $post->id) }}">
-                                        <span class="btn-inner--icon"><i class="material-icons">delete</i></span>
-                                    </a>
-                                </span>
+                                {{--<span class="ml-1" style="visibility: {{ $_COOKIE['user_id'] != $post->user_id ? 'hidden' : 'visible' }}">--}}
+                                    {{--<a class="btn btn-icon btn-2 btn-primary mr-4" role="button" href="{{ route('posts.edit', $post->id) }}">--}}
+                                        {{--<span class="btn-inner--icon"><i class="material-icons">edit</i></span>--}}
+                                    {{--</a>--}}
+                                    {{--<a class="btn btn-icon btn-2 btn-primary mr-4" role="button" href="{{ route('posts.delete', $post->id) }}">--}}
+                                        {{--<span class="btn-inner--icon"><i class="material-icons">delete</i></span>--}}
+                                    {{--</a>--}}
+                                {{--</span>--}}
                             </div>
                         </div>
                     </div>

@@ -60,7 +60,7 @@ Route::group(['middleware' => 'App\Http\Middleware\Logged_In'], function () {
 
     Route::get('/home', 'PostsController@index')->name('home');
 
-    Route::get('/favorites/index/', 'FavoritesController@index')->name('favorites.index');
+    Route::get('/favorites/', 'FavoritesController@index')->name('favorites.index');
 
     Route::post('/favorites/verify/', 'FavoritesController@verify')->name('favorites.verify');
 
