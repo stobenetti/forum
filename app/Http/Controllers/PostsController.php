@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Favorite;
 use App\Post;
 use App\Reply;
 use App\User;
@@ -18,8 +19,18 @@ class PostsController extends Controller {
      */
     public function index() {
         $posts = Post::whereDeleted(0)->get();
+
+        $favorites = Favorite::select('post_id')->whereUser_id($_COOKIE['user_id'])->get();
+        $favorites = $favorites->toArray();
+
+        $favs = array();
+        foreach ($favorites as $favorite) {
+            $favs[] = $favorite['post_id'];
+        }
+
         return view('posts.index')
-            ->with('posts', $posts);
+            ->with('posts', $posts)
+            ->with('favorites', $favs);
     }
 
     /**
@@ -38,6 +49,19 @@ class PostsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
+        $this->validate($request,
+            [
+                'title' => 'required|max:255',
+                'content' => 'required|max: 255'
+            ],
+            [
+                'title.required' => 'O campo Título deve ser preenchido.',
+                'content.required' => 'O campo Conteúdo deve ser preenchido.',
+                'title.max' => 'O limite de caracteres para o campo Título é de 255.',
+                'content.max' => 'O limite de caracteres para o campo Conteúdo é de 255.'
+            ]
+        );
+
         $post = new Post;
         $post->user_id = $_COOKIE['user_id'];
         $post->title = $request->get('title');
@@ -83,6 +107,19 @@ class PostsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
+        $this->validate($request,
+            [
+                'title' => 'required|max:255',
+                'content' => 'required|max: 255'
+            ],
+            [
+                'title.required' => 'O campo Título deve ser preenchido.',
+                'content.required' => 'O campo Conteúdo deve ser preenchido.',
+                'title.max' => 'O limite de caracteres para o campo Título é de 255.',
+                'content.max' => 'O limite de caracteres para o campo Conteúdo é de 255.'
+            ]
+        );
+
         $post = Post::find($id);
         if ($_COOKIE['user_id'] == $post->user_id) {
             $post->update($request->all());

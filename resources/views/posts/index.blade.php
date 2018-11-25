@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-{{--        @if (Auth::user()->privilege == 1)--}}
+        {{--        @if (Auth::user()->privilege == 1)--}}
         @if ($_COOKIE['user_privilege'] == 1)
             <div class="container mt-2">
                 <a href="{{ route('posts.create') }}" role="button" class="btn btn-primary btn-lg btn-block">Criar postagem</a>
@@ -11,6 +11,18 @@
 
         <div class="mt-3">
             @foreach($posts as $post)
+                <?php
+                if (in_array($post->id, $favorites)) {
+                    $class = 'btn-secondary';
+                    $color = '#861388';
+                }
+                else {
+                    $class = 'btn-primary';
+                    $color = '#fff';
+                }
+
+                ?>
+
                 <br>
                 <div class="card">
                     <div class="card-body">
@@ -22,7 +34,7 @@
                                 <span>
                                     {!! Form::open(['route' => 'favorites.verify', 'id' => 'favorite_form_' . $post->id]) !!}
                                     {!! Form::hidden('post_id', $post->id) !!}
-                                    <a id="favorite" class="btn btn-icon btn-2 btn-primary mr-4" role="button" onclick="sendForm({{ $post->id }})" style="color: #fff;">
+                                    <a id="favorite" class="btn btn-icon btn-2 {{ $class }} mr-4" role="button" onclick="sendForm({{ $post->id }})" style="color: {{ $color }};">
                                         <span class="btn-inner--icon"><i class="material-icons">star</i></span>
                                     </a>
                                     {!! Form::close() !!}

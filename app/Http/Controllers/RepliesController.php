@@ -35,6 +35,16 @@ class RepliesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
+        $this->validate($request,
+            [
+                'content' => 'required|max: 255'
+            ],
+            [
+                'content.required' => 'O campo Conteúdo deve ser preenchido.',
+                'content.max' => 'O limite de caracteres para o campo Conteúdo é de 255.'
+            ]
+        );
+
         $reply = new Reply;
         $reply->post_id = $request->get('post_id');
         $reply->user_id = $_COOKIE['user_id'];
@@ -78,6 +88,16 @@ class RepliesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
+        $this->validate($request,
+            [
+                'content' => 'required|max: 255'
+            ],
+            [
+                'content.required' => 'O campo Conteúdo deve ser preenchido.',
+                'content.max' => 'O limite de caracteres para o campo Conteúdo é de 255.'
+            ]
+        );
+
         $reply = Reply::find($id);
         if ($_COOKIE['user_id'] == $reply->user_id) {
             $reply->update($request->all());

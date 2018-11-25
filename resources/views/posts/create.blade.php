@@ -2,9 +2,17 @@
 
 @section('content')
     <div class="container">
+
         <div class="card">
             <h5 class="card-header text-center">Criar postagem</h5>
             <div class="card-body">
+        @if ($errors->any())
+            <div class="alert alert-danger" role="alert">
+                @foreach ($errors->all() as $error)
+                    {{ $error }} <br>
+                @endforeach
+            </div>
+        @endif
                 {!! Form::open(['action' => 'PostsController@store']) !!}
 
                 @include('forms.posts')

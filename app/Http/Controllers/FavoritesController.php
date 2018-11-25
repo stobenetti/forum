@@ -30,7 +30,6 @@ class FavoritesController extends Controller {
             ->where('post_id', '=', $request->post_id)
             ->first();
         var_dump($request->post_id);
-//        var_dump($result);
         if ($result == null) {
             $favorite = new Favorite;
             $favorite->user_id = $_COOKIE['user_id'];
@@ -40,6 +39,6 @@ class FavoritesController extends Controller {
         else {
             $result->delete();
         }
-        return redirect('favorites');
+        return redirect('posts');
     }
 }
