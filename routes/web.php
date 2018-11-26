@@ -20,22 +20,33 @@ Auth::routes();
 Route::post('/external_login', function (Request $request) {
     $http = new GuzzleHttp\Client;
 
-    $response = $http->post('http://localhost/bd_api/public/api/login', [
-        'form_params' => [
-            'email' => $request->email,
-            'password' => $request->password,
-        ]
-    ]);
+    try {
+        $response = $http->post('http://localhost/bd_api/public/api/login', [
+            'form_params' => [
+                'email' => $request->email,
+                'password' => $request->password,
+            ]
+        ]);
 
-    $res = json_decode((string)$response->getBody(), true);
+        $res = json_decode((string)$response->getBody(), true);
+
+        setcookie('access_token', $res['success']['token'], strtotime('+1 year'), '/');
+        setcookie('user_id', $res['user']['id'], strtotime('+1 year'), '/');
+        setcookie('user_privilege', $res['user']['privilege'], strtotime('+1 year'), '/');
+        setcookie('user_name', $res['user']['name'], strtotime('+1 year'), '/');
+        setcookie('user_email', $res['user']['email'], strtotime('+1 year'), '/');
+        return redirect('/posts');
+    } catch (\Exception $exception) {
+        return back()->withErrors(['Login e/ou senha inválidos.']);
+    }
+
     var_dump($res);
 
-    setcookie('access_token', $res['success']['token'], strtotime('+1 year'), '/');
-    setcookie('user_id', $res['user']['id'], strtotime('+1 year'), '/');
-    setcookie('user_privilege', $res['user']['privilege'], strtotime('+1 year'), '/');
-    setcookie('user_name', $res['user']['name'], strtotime('+1 year'), '/');
-    setcookie('user_email', $res['user']['email'], strtotime('+1 year'), '/');
-    return redirect('/posts');
+//    if ($res != null) {
+//    }
+//    else {
+//    }
+
 
 })->name('external_login');
 

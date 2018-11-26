@@ -7,15 +7,22 @@
                 <div class="card">
                     <div class="card-header text-center">{{ __('Login') }}</div>
 
+
                     <div class="card-body">
+                        @if ($errors->any())
+                            <div class="alert alert-danger" role="alert">
+                                {{ $errors->first() }}
+                            </div>
+                        @endif
+
                         <form method="POST" action="{{ route('external_login') }}" id="login_form">
-                        {{--<form id="login_form">--}}
+                            {{--<form id="login_form">--}}
                             @csrf
 
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="email" class="ml-2">Prontuário</label>
+                                        <label for="email" class="ml-2">E-mail</label>
                                         <input id="email" type="email" class="form-control form-control-alternative{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
 
                                         @if ($errors->has('email'))
@@ -59,7 +66,7 @@
                             <div class="row mt-2">
                                 <div class="col-md-6 text-center">
                                     <button class="btn btn-primary" type="submit">
-                                    {{--<button class="btn btn-primary" id="login">--}}
+                                        {{--<button class="btn btn-primary" id="login">--}}
                                         Entrar
                                     </button>
                                 </div>
@@ -76,4 +83,4 @@
         </div>
     </div>
 
-    @endsection
+@endsection
