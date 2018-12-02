@@ -16,9 +16,11 @@
                     </span>
                 </div>
             </div>
-            <div class="row justify-content-center my-5 pt-4">
-                <a href="{{ route('replies.create', $post->id) }}" role="button" class="btn btn-primary btn-lg btn-block">Responder</a>
-            </div>
+            @if ($_COOKIE['user_privilege'] == 1)
+                <div class="row justify-content-center my-5 pt-4">
+                    <a href="{{ route('replies.create', $post->id) }}" role="button" class="btn btn-primary btn-lg btn-block">Responder</a>
+                </div>
+            @endif
         </div>
 
 
