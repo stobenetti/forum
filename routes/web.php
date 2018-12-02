@@ -39,15 +39,6 @@ Route::post('/external_login', function (Request $request) {
     } catch (\Exception $exception) {
         return back()->withErrors(['Login e/ou senha inválidos.']);
     }
-
-    var_dump($res);
-
-//    if ($res != null) {
-//    }
-//    else {
-//    }
-
-
 })->name('external_login');
 
 Route::group(['middleware' => 'App\Http\Middleware\Logged_In'], function () {
@@ -65,9 +56,12 @@ Route::group(['middleware' => 'App\Http\Middleware\Logged_In'], function () {
         Route::get('/posts/delete/{id}', 'PostsController@delete')->name('posts.delete');
     });
 
+//    Route::resource('posts', 'PostsController');
+
     Route::get('/posts', 'PostsController@index')->name('posts.index');
 
-    Route::get('/posts/{id}', 'PostsController@show')->name('posts.show');
+    Route::get('/posts/detail/{id}', 'PostsController@show')->name('posts.detail');
+//    Route::get('/posts/detail/{id}', 'PostsController@show')->name('posts.detail');
 
     Route::get('/home', 'PostsController@index')->name('home');
 
