@@ -21,9 +21,9 @@
                         <div class="container">
                             <div class="row">
                                 <span>
-                                    {!! Form::open(['route' => 'favorites.verify', 'id' => 'favorite_form']) !!}
+                                    {!! Form::open(['route' => 'favorites.verify', 'id' => 'favorite_form_' . $post->id]) !!}
                                     {!! Form::hidden('post_id', $post->id) !!}
-                                    <a id="favorite" class="btn btn-icon btn-2 btn-primary mr-4" role="button" onclick="sendForm()" style="color: #fff;">
+                                    <a id="favorite" class="btn btn-icon btn-2 btn-primary mr-4" role="button" onclick="sendForm({{ $post->id }})" style="color: #fff;">
                                         <span class="btn-inner--icon">Remover dos favoritos</span>
                                     </a>
                                     {!! Form::close() !!}
@@ -45,8 +45,8 @@
     </div>
 
     <script type="text/javascript">
-        function sendForm() {
-            document.getElementById("favorite_form").submit();
+        function sendForm(post_id) {
+            document.getElementById("favorite_form_" + post_id).submit();
         }
     </script>
 @endsection
