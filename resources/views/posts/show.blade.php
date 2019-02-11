@@ -6,6 +6,9 @@
         <div class="container">
 
             <h3 class="card-title">{{ $post->title }}</h3>
+            <p class="text-muted">
+                <small>{{ date('d/m/Y H:i:s', strtotime($post->created_at)) }}</small>
+            </p>
             <hp class="card-text text-justify">{{ $post->content }}</hp>
             <div class="">
 
@@ -26,8 +29,8 @@
 
         @foreach($replies as $reply)
             <hr>
+            <p class="text-muted"><small>{{ date('d/m/Y H:i:s', strtotime($reply->created_at)) }}</small></p>
             <div class="">
-
                 <div class="pb-2 mt-2">{{ $reply->user_name }}: {{ $reply->content }}
                     <span class="float-right pt-3" style="visibility: {{ $_COOKIE['user_id'] != $reply->user_id ? 'hidden' : 'visible' }}">
                         <a href="{{ route('replies.edit', $reply->id) }}" style="color: #861388" class="mr-4"><i class="material-icons">edit</i></a>

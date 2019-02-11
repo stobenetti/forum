@@ -16,6 +16,7 @@
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ route('posts.show', $post->id) }}"><h5 class="ml-0 p-0 card-title btn btn-link">{{ $post->title }}</h5></a>
+                        <p class="text-muted"><small>{{ date('d/m/Y H:i:s', strtotime($post->created_at)) }}</small></p>
                         <p class="card-text">{{ $post->content }}</p>
 
                         <div class="container">
